@@ -40,6 +40,25 @@ end
 
 -- @description: service to create a contact
 function Controller:crear_contacto(name, email, phone, birthday_date)
+	if self.tabla_runtime == nil then
+		-- If the runtime table is nil, return nil and an error message
+		return nil, "The contact list is not initialized."
+	end
+	-- Check if the contact is already in the list
+	for _, contacto in ipairs(self.tabla_runtime) do
+		if contacto.name == name then
+			-- If the contact already exists, return nil and an error message
+			return nil, "This person already exists in the contact list, change the name."
+		end
+		if contacto.email == email then
+			-- If the contact already exists, return nil and an error message
+			return nil, "This email is already in use."
+		end
+		if contacto.phone == phone then
+			-- If the contact already exists, return nil and an error message
+			return nil, "This phone number is already in use."
+		end
+	end
 	-- Create a new contact using the service
 	local contacto, err = crear_contacto(name, email, phone, birthday_date, self.tabla_runtime)
 	-- Check if there was an error creating the contact
