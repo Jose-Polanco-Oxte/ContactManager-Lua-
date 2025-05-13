@@ -65,30 +65,26 @@ end
 
 function Validator:valid_birthday_date(str)
 	-- Verificar el patrón básico: 2 dígitos / 2 dígitos
-    if not string.match(str, "^%d%d/%d%d$") then
-		return nil, "Invalid birthday date format: " .. birthday_date
-    end
-    
-    -- Extraer día y mes
-    local dia, mes = string.match(str, "(%d%d)/(%d%d)")
-    dia = tonumber(dia)
-    mes = tonumber(mes)
-    
-    -- Validar rango del mes (1-12)
-    if mes < 1 or mes > 12 then
-		return nil, "Invalid month: " .. mes
-    end
-    
-    -- Validar rango del día (1-31)
-    if dia < 1 or dia > 31 then
-		return nil, "Invalid day: " .. dia
-    end
-    
-    -- Validar días según el mes
-    local diasPorMes = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
-    if dia > diasPorMes[mes] then
-		return nil, "Invalid day for month " .. mes .. ": " .. dia
-    end
+	if not string.match(str, "^%d%d/%d%d$") then
+		return nil, "Invalid birthday date format: " .. tostring(str)
+	end
+	-- Extraer día y mes
+	local dia, mes = string.match(str, "(%d%d)/(%d%d)")
+	dia = tonumber(dia)
+	mes = tonumber(mes)
+	-- Validar rango del mes (1-12)
+	if mes < 1 or mes > 12 then
+		return nil, "Invalid month: " .. tostring(mes)
+	end
+	-- Validar rango del día (1-31)
+	if dia < 1 or dia > 31 then
+		return nil, "Invalid day: " .. tostring(dia)
+	end
+	-- Validar días según el mes
+	local diasPorMes = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+	if dia > diasPorMes[mes] then
+		return nil, "Invalid day for month " .. tostring(mes) .. ": " .. tostring(dia)
+	end
 	return true
 end
 
