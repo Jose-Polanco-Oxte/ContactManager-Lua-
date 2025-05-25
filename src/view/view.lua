@@ -39,4 +39,12 @@ function View:showMessage(message)
     print(message)
 end
 
+function View:showError(message)
+    print("")
+    print("=== Error ===")
+    print(message)
+    print("=============")
+    print("")
+end
+
 return View
