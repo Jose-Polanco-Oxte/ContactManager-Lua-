@@ -4,7 +4,7 @@ local ContactController = require("src.controller.contact_controller")
 
 -- @description: test for contact controller
 
-local controller = ContactController:new()
+local controller = ContactController:new("src/test")
 -- test data
 local contact_1, err = controller:crear_contacto("John Doe", "pene@gmail.com", "99423523", "04/02")
 

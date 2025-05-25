@@ -3,36 +3,23 @@ local crear_contacto = require("src.controller.services.crear_contacto")
 local obtener_contacto = require("src.controller.services.obtener_contacto")
 local obtener_contactos_ordenados = require("src.controller.services.obtener_contactos_ordenados")
 local obtener_por_birthday = require("src.controller.services.obtener_por_birthday")
-
--- import the io controller(mock)
-local io_controller = function ()
-	-- Mock IO controller
-	local io_mock = {}
-
-	function io_mock.load_contacts()
-		local all_contacts = {}
-		return all_contacts
-	end
-
-	function io_mock.save_contacts(all_contacts)
-		print("mocked output")
-	end
-
-	return io_mock
-end
+local io_controller = require("src.controller.persistence.io_manager")
 
 Controller = {}
 Controller.__index = Controller
 
 -- initialize the controller
-function Controller:new()
-	local io = io_controller() -- completamente privado
+-- @description: This function initializes the controller with a file (preferably in the path of the folder where it is executed)
+function Controller:new(filepath)
 	local self = setmetatable({}, Controller)
-	self.tabla_runtime = io.load_contacts()
-
+	local contacts, err = io_controller.cargar_contactos(filepath .. "/contactos.csv")
+	if not contacts then
+		error("Error loading contacts: " .. (err or "Unknown error"))
+	end
+	self.tabla_runtime = contacts
 	-- Métodos que requieren acceso a io usan una closure
 	self.guardar_contactos = function()
-		io.save_contacts(self.tabla_runtime)
+		io_controller.persistir_contactos(self.tabla_runtime, filepath .. "/contactos.csv")
 	end
 
 	return self
