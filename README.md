@@ -1,6 +1,6 @@
 # ContactManager-Lua-
 
-Project for a university course which proposes the creation of a system capable of handling contacts, but with the characteristic of being implemented in Lua.
+Proyecto para un curso universitario que propone la creación de un sistema capaz de manejar contactos, pero con la característica de estar implementado en Lua.
 
 Proyecto: Agenda de Contactos
 Responsable de esta parte: Daniela Villarino Budip
