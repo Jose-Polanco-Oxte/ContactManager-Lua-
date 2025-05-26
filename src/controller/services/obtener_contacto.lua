@@ -10,7 +10,7 @@ function obtener_contacto(nombre_persona, table_runtime)
 			return contacto
 		end
 	end
-	return nil, "Contact not found"
+	return nil, "Contacto no encontrado: " .. nombre_persona
 end
 
 -- return the function

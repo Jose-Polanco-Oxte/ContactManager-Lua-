@@ -5,10 +5,10 @@ local Contacto = require("src.model.contact")
 
 function obtener_por_mes_cumple(month_number, table_runtime)
 	if not table_runtime or #table_runtime == 0 then
-		return nil, "No contacts available"
+		return nil, "No hay contactos disponibles."
 	end
 	if not month_number or month_number < 1 or month_number > 12 then
-		return nil, "Invalid month number"
+		return nil, "Numero de mes inválido. Debe ser un número entre 1 y 12."
 	end
 	local contacts_with_birthday = {}
 	for _, contacto in ipairs(table_runtime) do
@@ -21,7 +21,7 @@ function obtener_por_mes_cumple(month_number, table_runtime)
 	end
 	-- Check if any contacts were found
 	if #contacts_with_birthday == 0 then
-		return nil, "No contacts found with the specified birthday month"
+		return nil, "No hay contactos con cumpleaños en el mes especificado."
 	end
 	-- Return the list of contacts with the specified birthday date
 	return contacts_with_birthday
