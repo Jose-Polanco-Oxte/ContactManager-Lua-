@@ -14,7 +14,7 @@ function Controller:new(filepath)
 	local self = setmetatable({}, Controller)
 	local contacts, err = io_controller.cargar_contactos(filepath .. "/contactos.csv")
 	if not contacts then
-		error("Error loading contacts: " .. (err or "Unknown error"))
+		error("Error al cargar contactos: " .. (err or "Unknown error"))
 	end
 	self.tabla_runtime = contacts
 	-- Métodos que requieren acceso a io usan una closure
@@ -29,21 +29,21 @@ end
 function Controller:crear_contacto(name, email, phone, birthday_date)
 	if self.tabla_runtime == nil then
 		-- If the runtime table is nil, return nil and an error message
-		return nil, "The contact list is not initialized."
+		return nil, "La tabla de contactos no ha sido inicializada."
 	end
 	-- Check if the contact is already in the list
 	for _, contacto in ipairs(self.tabla_runtime) do
 		if contacto.name == name then
 			-- If the contact already exists, return nil and an error message
-			return nil, "This person already exists in the contact list, change the name."
+			return nil, "Esta persona ya está en la lista de contactos."
 		end
 		if contacto.email == email then
 			-- If the contact already exists, return nil and an error message
-			return nil, "This email is already in use."
+			return nil, "Este correo electrónico ya está en uso."
 		end
 		if contacto.phone == phone then
 			-- If the contact already exists, return nil and an error message
-			return nil, "This phone number is already in use."
+			return nil, "Este número de celular ya está en uso."
 		end
 	end
 	-- Create a new contact using the service

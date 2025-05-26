@@ -5,7 +5,7 @@ local Contacto = require("src.model.contact")
 
 function obtener_contactos_ordenados(tabla_runtime)
 	if not tabla_runtime or #tabla_runtime == 0 then
-		return nil, "No contacts available"
+		return nil, "No hay contactos disponibles."
 	end
 	-- Sort the contacts by name
 	table.sort(tabla_runtime, function(a, b)
